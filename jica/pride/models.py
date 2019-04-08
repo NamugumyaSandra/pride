@@ -1,5 +1,6 @@
 from django.db import models
 from phone_field import PhoneField
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -42,12 +43,12 @@ class Season(models.Model):
         return self.season
 
 
-class Officer(models.Model):
-    username = models.CharField(max_length=200)
+class Officer(AbstractUser):
+    username = models.CharField(max_length=200,unique=True)
     LoginID = models.CharField(max_length=100)
     password = models.CharField(max_length=200)
-    district_id = models.ForeignKey(District,on_delete=models.CASCADE,default=1)
-    subcounty_id = models.ForeignKey(Subcounty,on_delete=models.CASCADE,default=1)
+    district_id = models.ForeignKey(District,on_delete=models.CASCADE)
+    subcounty_id = models.ForeignKey(Subcounty,on_delete=models.CASCADE)
     phone = PhoneField(blank=True, help_text='Contact phone number')
 
     def __str__(self):
@@ -55,8 +56,7 @@ class Officer(models.Model):
 
 
 class Farmer(models.Model):
-    district_id = models.ForeignKey(District,on_delete=models.CASCADE)
-    subcounty_id = models.ForeignKey(Subcounty,on_delete=models.CASCADE)
+    Officer = models.ForeignKey(Officer,on_delete=models.SET_DEFAULT,default='')
     parish = models.ForeignKey(Parish,on_delete=models.CASCADE)
     village = models.ForeignKey(Village,on_delete=models.CASCADE)
     gender = models.CharField(max_length=20)
