@@ -1,1 +1,4 @@
 .vscode
+jica/pride/__pycache__
+jica/jica/__pycache__
+jica/pride/migrations/__pycache__
