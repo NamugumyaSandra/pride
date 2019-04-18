@@ -7,10 +7,13 @@ verify_ssl = true
 
 [packages]
 django = "*"
-django-postgres-copy = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
-django-phone-field = "*"
+djangorestframework = "*"
+django-import-export = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.6"
